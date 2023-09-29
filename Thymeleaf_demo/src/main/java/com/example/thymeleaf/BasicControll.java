@@ -4,21 +4,22 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-public class BasicControll {
+import java.io.IOException;
+import java.util.List;
 
 
-    @RequestMapping("/helloWorld")
-    public String HelloWorld(@RequestParam String name, Model model){
-        model.addAttribute("name", name);
-        return "helloWorld.html";
-    }
 
-    @RequestMapping("/testing")
-    public String testing(){
-        return "index";
-    }
+@RestController
+    public class BasicControll {
+
+        @RequestMapping("/getLatest")
+        public List<Temps> getLatest () throws IOException {
+            Repo re = new Repo();
+            List<Temps> TempList = re.getValues();
+            return TempList;
+        }
 
 }
 
